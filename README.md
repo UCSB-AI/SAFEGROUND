@@ -10,11 +10,11 @@ SafeGround estimates *spatial uncertainty* by aggregating multiple stochastic gr
 
 **Paper:**
 📄 *SafeGround: Know When to Trust GUI Grounding Models via Uncertainty Calibration*
+
 🔗 [https://arxiv.org/abs/2602.02419](https://arxiv.org/abs/2602.02419)
 
 **Project Page:**
 🔗 [https://safeground-ericlab.github.io](https://safeground-ericlab.github.io)
-
 
 ---
 
@@ -42,6 +42,15 @@ SAFEGROUND/
 
 Given multiple stochastic grounding samples, SafeGround constructs a spatial probability distribution over a patch grid, identifies coherent high-probability regions, and computes region-level uncertainty measures that capture different failure modes of GUI grounding.
 
+
+### Implemented Uncertainty Measures
+
+| Method          | Description                     | 
+| --------------- | ------------------------------- | 
+| `margin`        | Ambiguity between top-2 regions |
+| `entropy`       | Distributional dispersion       | 
+| `concentration` | Lack of spatial concentration   | 
+| `combined`      | Composite uncertainty           |  
 
 ---
 

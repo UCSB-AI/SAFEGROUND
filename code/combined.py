@@ -12,9 +12,9 @@ Default Weights:
 from typing import List, Dict, Optional
 from dataclasses import dataclass
 
-from margin import compute_region_margin
-from entropy import compute_region_entropy
-from concentration import compute_region_concentration
+from SAFEGROUND.code.margin import compute_region_margin
+from SAFEGROUND.code.entropy import compute_region_entropy
+from SAFEGROUND.code.concentration import compute_region_concentration
 
 
 DEFAULT_WEIGHTS = {
