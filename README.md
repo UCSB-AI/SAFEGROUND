@@ -29,7 +29,7 @@ SAFEGROUND/
 ├── concentration.py    # Concentration-based uncertainty (HHI complement)
 ├── combined.py         # Weighted combination of uncertainty measures
 ├── uncertainty.py      # Unified uncertainty computation API
-├── fdr_control.py      # Finite-sample FDR control (Clopper–Pearson)
+├── selective_prediction.py # Accepted error control (Clopper–Pearson)
 └── README.md           # Project documentation
 ```
 
@@ -54,19 +54,23 @@ Given multiple stochastic grounding samples, SafeGround constructs a spatial pro
 
 ---
 
-## Risk Control via FDR Calibration
+## Selective Prediction with Accepted Error Control
 
-SafeGround calibrates an uncertainty threshold on a held-out calibration set to control the **False Discovery Rate (FDR)** of accepted predictions.
+SafeGround calibrates an uncertainty threshold on a held-out calibration set to control the **error rate among accepted predictions**. A prediction is accepted when its uncertainty is no greater than the calibrated threshold and is otherwise abstained from or deferred.
+
+The region activation threshold is fixed to **0** by default. Consequently, every heatmap patch with positive probability is included during connected-region extraction.
 
 ### Clopper–Pearson Upper Confidence Bound
 
-Given (w) observed errors among (m) accepted samples, the FDR upper bound is computed as:
+Given `w` observed errors among `m` accepted calibration samples, the one-sided upper confidence bound with calibration failure probability `δ` is:
 
 ```
-r_upper = Beta.ppf(1 - α, w + 1, m - w)
+r_upper = Beta.ppf(1 - δ, w + 1, m - w)
 ```
 
-The largest threshold whose upper bound does not exceed the target risk level is selected for deployment.
+When all accepted calibration samples are errors (`w = m`), the upper bound is defined as `1`.
+
+Following Algorithm 1, candidate thresholds are tested in ascending uncertainty order. SafeGround retains each certified threshold while its upper bound does not exceed the target accepted error rate, and stops at the first uncertified threshold. If the first candidate cannot be certified, no prediction is accepted.
 
 ### Reported Metrics
 
@@ -74,8 +78,10 @@ The largest threshold whose upper bound does not exceed the target risk level is
 | ----------------- | ------------------------------------------ |
 | `threshold`       | Calibrated uncertainty threshold           |
 | `power`           | Fraction of correct predictions retained   |
+| `coverage`        | Fraction of all predictions accepted       |
 | `abstention_rate` | Fraction of predictions rejected           |
-| `upper_bound`     | Clopper–Pearson FDR upper confidence bound |
+| `accepted_error_rate` | Error fraction among accepted predictions |
+| `calibration_upper_bound` | Clopper–Pearson accepted-error upper bound |
 
 ---
 More code coming soon.
