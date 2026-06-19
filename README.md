@@ -45,12 +45,12 @@ Given multiple stochastic grounding samples, SafeGround constructs a spatial pro
 
 ### Implemented Uncertainty Measures
 
-| Method          | Description                     | 
-| --------------- | ------------------------------- | 
+| Method          | Description                     |
+| --------------- | ------------------------------- |
 | `margin`        | Ambiguity between top-2 regions |
-| `entropy`       | Distributional dispersion       | 
-| `concentration` | Lack of spatial concentration   | 
-| `combined`      | Composite uncertainty           |  
+| `entropy`       | Distributional dispersion       |
+| `concentration` | Lack of spatial concentration   |
+| `combined`      | Composite uncertainty           |
 
 ---
 

@@ -32,7 +32,7 @@ from concentration import compute_region_concentration
 from combined import compute_combined_uncertainty, DEFAULT_WEIGHTS
 
 DEFAULT_PATCH_SIZE = 28
-DEFAULT_ACTIVATION_THRESHOLD = 0.3
+DEFAULT_ACTIVATION_THRESHOLD = 0.0
 
 
 @dataclass
@@ -64,7 +64,7 @@ def compute_all_uncertainties(
         resized_width: Width of resized image
         resized_height: Height of resized image
         patch_size: Patch size for heatmap (default: 28)
-        activation_threshold: Threshold for region activation (default: 0.3)
+        activation_threshold: Threshold for region activation (default: 0.0)
 
     Returns:
         Dictionary with all uncertainty values:
@@ -119,7 +119,7 @@ def compute_uncertainty(
         resized_height: Height of resized image
         method: Uncertainty method ('margin', 'entropy', 'concentration', 'combined')
         patch_size: Patch size for heatmap
-        activation_threshold: Threshold for region activation
+        activation_threshold: Threshold for region activation (default: 0.0)
 
     Returns:
         Uncertainty value in [0, 1]
@@ -159,7 +159,7 @@ def compute_uncertainty_detailed(
         resized_width: Width of resized image
         resized_height: Height of resized image
         patch_size: Patch size for heatmap
-        activation_threshold: Threshold for region activation
+        activation_threshold: Threshold for region activation (default: 0.0)
 
     Returns:
         UncertaintyResult with all values and metadata

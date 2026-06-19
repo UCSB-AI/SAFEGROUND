@@ -13,7 +13,7 @@ Key Steps:
 import numpy as np
 from typing import List, Tuple, Optional
 
-DEFAULT_ACTIVATION_THRESHOLD = 0.3
+DEFAULT_ACTIVATION_THRESHOLD = 0.0
 
 
 def extract_regions_from_heatmap(
@@ -30,7 +30,8 @@ def extract_regions_from_heatmap(
     Args:
         heatmap_prob: Normalized probability heatmap (n_height, n_width)
         activation_threshold: Fraction of max probability to consider as
-                             activated (default: 0.3 = 30% of max)
+                             activated (default: 0.0). With the default,
+                             every patch with positive probability is active.
 
     Returns:
         region_scores: List of region scores (average probability per region)
